@@ -1,0 +1,14 @@
+/* HOME */
+
+.home {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.home-content {
+    max-width: 600px;
+}

@@ -1,0 +1,10 @@
+/* MAIN STYLES */
+
+@import url("layout.css");
+@import url("typography.css");
+@import url("components.css");
+
+@import url("pages/home.css");
+@import url("pages/bands.css");
+@import url("pages/detail.css");
+@import url("pages/addgroup.css");

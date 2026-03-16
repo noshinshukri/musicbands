@@ -1,0 +1,40 @@
+/* ADDGROUP */
+
+.add-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.add-group-form label {
+    font-weight: 600;
+}
+
+.add-group-form input,
+.add-group-form textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.add-group-form textarea {
+    resize: vertical;
+}
+
+.add-group-form .btn {
+    align-self: flex-start;
+    background: #D04327;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-group-form .btn:hover {
+    background: #FF7245;
+}

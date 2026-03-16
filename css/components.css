@@ -1,0 +1,76 @@
+/* COMPONENTS */
+
+.btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    background: #D04327;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: #FF7245;
+}
+
+.spotify {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    background: rgb(20, 85, 20);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.band-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.25s;
+}
+
+.band-card:hover {
+    transform: translateY(-6px);
+}
+
+.band-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.band-info {
+    padding: 20px;
+}
+
+.band-info h3 {
+    margin-top: 0;
+}
+
+.pagination {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pagination a {
+    margin: 5px;
+    padding: 8px 14px;
+    border: 1px solid #D04327;
+    color: #D04327;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background: #D04327;
+    color: white;
+}
+
+.pagination a.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}

@@ -1,0 +1,19 @@
+/* TYPOGRAPHY */
+
+@font-face {
+    font-family: 'MinEgenFont';
+    src: url('../font/NCLGasdrifo-Demo.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.h1 {
+    font-family: 'MinEgenFont';
+    font-weight: normal;
+    font-style: normal;
+}
+
+.h1 a {
+    color: white;
+    text-decoration: none;
+}
