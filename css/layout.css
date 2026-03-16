@@ -82,3 +82,44 @@ footer.footer {
     color: white;
     background: rgba(0, 0, 0, 0.5);
 }
+
+
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .menu {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu a {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 15px;
+    }
+
+    .header-container {
+        gap: 15px;
+    }
+
+    .menu {
+        gap: 15px;
+    }
+
+    .menu a {
+        font-size: 14px;
+    }
+}
