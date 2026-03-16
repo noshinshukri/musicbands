@@ -11,6 +11,28 @@
     text-decoration: none;
 }
 
+.search {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(20, 85, 20);
+    color: white;
+    padding: 8px 12px;
+    margin-left: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background: rgb(30, 120, 30);
+}
+
 .btn:hover {
     background: #FF7245;
 }
