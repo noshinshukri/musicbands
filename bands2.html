@@ -22,15 +22,15 @@
             </div>
 
             <div class="search">
-                <input type="text" placeholder="Search bands...">
-                <div class="search-btn">Search</div>
+                <input type="text" id="search-input" placeholder="Search bands...">
+                <div id="search-btn" class="search-btn">Search</div>
 
             </div>
 
             <nav class="menu">
                 <a href="index.html">Home</a>
-                <a class="active" href="bands.html">Bands</a>
-                <a href="addgroup.html">Add Group</a>
+                <a class="active" href="bands2.html">Bands</a>
+                <a href="./add-group/addgroup.html">Add Group</a>
             </nav>
 
         </div>
@@ -40,101 +40,14 @@
 
     <main class="bands-section">
 
-        <div class="bands-grid">
-
-
-
-            <div class="band-card">
-
-                <img src="images/pearljam.jpg">
-
-                <div class="band-info">
-
-                    <h3>Pearl Jam</h3>
-
-                    <p>Genre: Grunge</p>
-
-                    <p><strong>Established:</strong> 1990</p>
-
-                    <p><strong>Albums:</strong> 12</p>
-
-                    <a href="pearljam.html" class="btn">View Details</a>
-
-                    <a href="https://open.spotify.com/artist/1w5Kfo2jwwIPruYS2UWh56" target="_blank" class="spotify">
-                        🎧 Listen on Spotify
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-            <div class="band-card">
-
-                <img src="images/rhcp.jpg">
-
-                <div class="band-info">
-
-                    <h3>Red Hot Chili Peppers</h3>
-
-                    <p>Genre: Funk Rock</p>
-
-                    <p><strong>Established:</strong> 1983</p>
-
-                    <p><strong>Albums:</strong> 13</p>
-
-                    <a href="rhcp.html" class="btn">View Details</a>
-
-                    <a href="https://open.spotify.com/artist/0L8ExT028jH3ddEcZwqJJ5" target="_blank" class="spotify">
-                        🎧 Listen on Spotify
-                    </a>
-
-                </div>
-
-            </div>
-
-
-
-
-            <div class="band-card">
-
-                <img src="images/oasis.jpg">
-
-                <div class="band-info">
-
-                    <h3>Oasis</h3>
-
-                    <p>Genre: Britpop</p>
-
-                    <p><strong>Established:</strong> 1991</p>
-
-                    <p><strong>Albums:</strong> 7</p>
-
-                    <a href="oasis.html" class="btn">View Details</a>
-
-                    <a href="https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4" target="_blank" class="spotify">
-                        🎧 Listen on Spotify
-                    </a>
-
-                </div>
-
-            </div>
+        <div id="bands-grid" class="bands-grid">
 
         </div>
 
 
-        <div class="pagination">
 
-            <a href="bands.html">«</a>
 
-            <a href="bands.html">1</a>
-
-            <a class="active">2</a>
-
-            <a class="disabled">»</a>
-
-        </div>
+        <div id="pagination" class="pagination-container"></div>
 
     </main>
 
@@ -145,6 +58,9 @@
 
     </footer>
 
+
+    <script type="module" src="./script.js"></script>
+    <script type="module" src="./bandItem.js"></script>
 </body>
 
 </html>

@@ -47,6 +47,10 @@ body::-webkit-scrollbar {
     gap: 30px;
 }
 
+.header-left h1{
+    white-space: nowrap;
+}
+
 .menu {
     display: flex;
     gap: 30px;
@@ -57,6 +61,7 @@ body::-webkit-scrollbar {
     text-decoration: none;
     font-size: 18px;
     position: relative;
+    white-space: nowrap;
 }
 
 .menu a::after {
