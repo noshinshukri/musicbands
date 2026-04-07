@@ -26,7 +26,8 @@ if (band) {
     
     if (band.imageLink?.startsWith("http") || band.imageLink?.startsWith("data:")) {
         imgElement.src = band.imageLink;
-    } else {
+    } 
+    else {
         imgElement.src = "../" + (band.imageLink || "images/default.jpg");
     }
     imgElement.alt = band.name;
@@ -36,12 +37,14 @@ if (band) {
     if (band.spotifyLink) {
         spotifyBtn.href = band.spotifyLink;
         spotifyBtn.target = "_blank";
-    } else {
+    } 
+    else {
         spotifyBtn.style.display = "none";
     }
 
 
-} else {
+} 
+else {
     document.getElementById("band-detail-container").innerHTML = `
         <h2>Bandet hittades inte</h2>
         <a href="../bands2.html" class="btn">Gå tillbaka</a>

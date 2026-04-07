@@ -1,4 +1,4 @@
-// --- HÅRDKODADE OBJEKT ---
+// --- HARDCODED DATA ---
 export const bands = [
     {
         id: 1,
@@ -134,6 +134,7 @@ export const bands = [
     }
 ];
 
+// --- API FETCHING ---
 export async function fetchBands() {
     try {
 
