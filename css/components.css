@@ -98,3 +98,12 @@
     background-color: #ffffff;
     cursor: pointer;
 }
+
+.search-info {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+    margin-top: -20px;
+}

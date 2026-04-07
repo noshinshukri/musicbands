@@ -46,15 +46,25 @@ function setupSearch() {
 
     searchInput.addEventListener("input", (e) => {
         const text = e.target.value.toLowerCase();
-        
-        
-        const filtered = allBands.filter(b => 
-            b.name.toLowerCase().includes(text) || 
+
+
+        const filtered = allBands.filter(b =>
+            b.name.toLowerCase().includes(text) ||
             b.genre.toLowerCase().includes(text)
         );
 
+        const countElement = document.getElementById("results-count");
+        if (countElement) {
+            if (text.length > 0) {
+                countElement.innerHTML = `Hittade <strong>${filtered.length}</strong> band som matchar "<em>${text}</em>"`;
+            } else {
+                // Om sökfältet är tomt, visa bara totala antalet
+                countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
+            }
+        }
+
         currentPage = 1;
-        renderBands(filtered); 
+        renderBands(filtered);
     });
 }
 
@@ -62,7 +72,7 @@ function setupSearch() {
 function renderBands(listToRender) {
     const bandsGrid = document.getElementById("bands-grid");
     if (!bandsGrid) return;
-    
+
     bandsGrid.innerHTML = "";
 
     const start = (currentPage - 1) * itemsPerPage;
@@ -102,7 +112,7 @@ function renderPagination(listToRender) {
         const btn = document.createElement("button");
         btn.innerText = i;
         btn.className = (i === currentPage) ? "page-btn active" : "page-btn";
-        
+
         btn.onclick = () => {
             currentPage = i;
             renderBands(listToRender);
@@ -115,13 +125,23 @@ function renderPagination(listToRender) {
 // --- INIT ---
 async function init() {
 
+
     renderHeader();
+
+    const countElement = document.getElementById("results-count");
+    if (countElement) {
+        countElement.innerHTML = `Visar alla <strong>${bands.length}</strong> band`;
+    }
 
     const localBands = JSON.parse(localStorage.getItem("bands")) || bands;
     const apiBands = await fetchBands();
 
     allBands = [...localBands, ...apiBands];
     allBands.sort((a, b) => a.established - b.established);
+
+    if (countElement) {
+        countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
+    }
 
 
     renderBands(allBands);
