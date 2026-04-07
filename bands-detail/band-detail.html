@@ -12,25 +12,7 @@
 
 <body class="page-layout">
 
-    <!-- HEADER -->
-    <header class="header">
-        <div class="header-container">
-
-            <div class="header-left">
-                <h1 class="h1"><a href="../index.html">Music Bands</a></h1>
-                <p>Explore the world of music bands and their details.</p>
-            </div>
-
-            <nav class="menu">
-                <a href="../index.html">Home</a>
-                <a href="../bands2.html" class="active">Bands</a>
-                <a href="../add-group/addgroup.html">Add Group</a>
-            </nav>
-
-
-
-        </div>
-    </header>
+    <div id="header-root"></div>
 
 
 
@@ -52,7 +34,8 @@
                     <strong>Genre:</strong><span id="genre"></span><br>
                     <strong>Established:</strong><span id="established"></span><br>
                     <strong>Members:</strong><span id="members"></span><br>
-                    <strong>Famous Albums:</strong><span id="albums"></span>
+                    <strong>Famous Albums:</strong><span id="albums"></span><br>
+                    <strong>Album Names:</strong><span id="albumNames"></span>
                 </p>
 
                 <a href="#" id="spotifyLink" class="spotify">Listen on Spotify</a>
@@ -69,11 +52,11 @@
 
     <!-- FOOTER -->
 
-    <footer>
+    <footer class="footer">
         <p>© 2025 Music Bands</p>
     </footer>
 
-    <script src="band-detail.js"></script>
+    <script type="module" src="band-detail.js"></script>
 </body>
 
 </html>

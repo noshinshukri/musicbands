@@ -1,10 +1,11 @@
+// --- HÅRDKODADE OBJEKT ---
 export const bands = [
     {
         id: 1,
         name: "The Beatles",
         genre: "Rock",
         established: 1960,
-        description: "",
+        description: "The Beatles were an English rock band formed in Liverpool in 1960. They are widely regarded as the most influential band of all time, known for their innovative music and cultural impact during the 1960s.",
         albums: 12,
         members: "John Lennon, Paul McCartney, George Harrison, Ringo Starr",
         imageLink: "images/thebeatles.jpg",
@@ -124,11 +125,60 @@ export const bands = [
         name: "The Rolling Stones",
         genre: "Rock",
         established: 1962,
-        description: "",
+        description: "The Rolling Stones are an English rock band formed in London in 1962. They are one of the most enduring and influential rock bands in history, known for their energetic performances and iconic songs.",
         albums: 30,
         members: "Mick Jagger, Keith Richards, Ronnie Wood",
-        imageLink: "images/rollingstones.jpg",
+        imageLink: "images/rollingstones.jpg",  
         detailsLink: "bands-detail/rollingstones.html",
         spotifyLink: "https://open.spotify.com/artist/22bE4uQ6baNwSHPVcDxLCe"
     }
 ];
+
+export async function fetchBands() {
+    try {
+
+        const resGroups = await fetch("https://music.api.public.seido.se/api/MusicGroups/Read?seeded=true&flat=true&pageSize=200");
+        const resAlbums = await fetch("https://music.api.public.seido.se/api/Albums/Read?seeded=true&flat=false&pageSize=2000");
+        const resArtists = await fetch("https://music.api.public.seido.se/api/Artists/Read?flat=false&pageSize=2000");
+
+        const groupsData = await resGroups.json();
+        const albumsData = await resAlbums.json();
+        const artistsData = await resArtists.json();
+
+
+        return groupsData.pageItems.map(group => {
+
+
+            const albumCount = albumsData.pageItems.filter(album =>
+                album.musicGroup?.musicGroupId === group.musicGroupId
+            ).length;
+
+            const albumNames = albumsData.pageItems.filter(album =>
+                album.musicGroup?.musicGroupId === group.musicGroupId
+            );
+
+            const groupMembers = artistsData.pageItems
+                .filter(artist => artist.musicGroups?.some(mg => mg.musicGroupId === group.musicGroupId))
+                .map(artist => `${artist.firstName} ${artist.lastName}`)
+                .join(", ");
+
+            return {
+                id: group.musicGroupId,
+                name: group.name,
+                genre: group.strGenre,
+                established: group.establishedYear,
+                description: group.description || "No description available for this group.",
+                albums: albumCount,
+                albumNames: albumNames.map(album => album.name).join(", "),
+                members: groupMembers || "No members found",
+                imageLink: group.imageUrl || "images/default.jpg",
+                spotifyLink: "#",
+                detailsLink: `details.html?id=${group.musicGroupId}`
+            };
+        });
+
+    } catch (error) {
+        console.error("Det gick inte att hämta data:", error);
+        return [];
+    }
+}

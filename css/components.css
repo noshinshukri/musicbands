@@ -74,7 +74,7 @@
     margin-top: 0;
 }
 
-.pagination {
+.pagination-container {
     display: block;
     margin-top: 40px;
     text-align: center;
@@ -91,8 +91,10 @@
 .page-btn.active {
     background: #D04327;
     color: white;
+    cursor: pointer;
 }
 
 .page-btn:hover:not(.active) {
-    background-color: #f0f0f0;
+    background-color: #ffffff;
+    cursor: pointer;
 }
