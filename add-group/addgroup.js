@@ -48,7 +48,7 @@ form.addEventListener("submit", function (e) {
         alert("Please enter valid numbers for Established Year.");
         return;
     }
-    if(isNaN(albums)){
+    else if(isNaN(albums)){
         alert("Please enter valid numbers for Albums.");
         return;
     }
