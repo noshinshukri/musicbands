@@ -1,4 +1,3 @@
-
 // --- RENDER HEADER ---
 function renderHeader() {
     const headerRoot = document.getElementById("header-root");
@@ -26,15 +25,6 @@ if (document.readyState === "loading") {
     renderHeader();
 }
 
-// --- BANDS DATA & API FETCHING ---
-import { bands } from "../bandItem.js";
-console.log("Script is running");
-console.log(bands);
-
-if (!localStorage.getItem("bands")) {
-    localStorage.setItem("bands", JSON.stringify(bands));
-}
-
 const form = document.getElementById("band-form");
 
 // --- FORM SUBMISSION LOGIC ---
@@ -54,10 +44,10 @@ form.addEventListener("submit", function (e) {
     }
 
     const newBand = {
-        id: Date.now(),
+        musicGroupId: Date.now(),
         name: document.getElementById("band-name").value,
-        genre: document.getElementById("genre").value,
-        established: Number(established),
+        strGenre: document.getElementById("genre").value,
+        establishedYear: Number(established),
         description: document.getElementById("description").value,
         albums: Number(albums),
         members: document.getElementById("members").value,
@@ -65,11 +55,11 @@ form.addEventListener("submit", function (e) {
         imageLink: document.getElementById("imageLink").value || "images/default.jpg"
     }
 
-    const storedBands = JSON.parse(localStorage.getItem("bands")) || [];
+    const storedBands = JSON.parse(sessionStorage.getItem("localBands")) || [];
 
     storedBands.push(newBand);
 
-    localStorage.setItem("bands", JSON.stringify(storedBands));
+    sessionStorage.setItem("localBands", JSON.stringify(storedBands));
 
     form.reset();
     alert("Band added successfully!")

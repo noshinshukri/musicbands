@@ -1,4 +1,6 @@
-import { bands, fetchBands } from "./bandItem.js";
+import musicService from "./musicService.js";
+
+const service = new musicService("https://music.api.public.seido.se/api");
 
 // --- GLOBAL STATE ---
 let allBands = [];
@@ -49,8 +51,7 @@ function setupSearch() {
 
 
         const filtered = allBands.filter(b =>
-            b.name.toLowerCase().includes(text) ||
-            b.genre.toLowerCase().includes(text)
+            b.name.toLowerCase().includes(text)
         );
 
         const countElement = document.getElementById("results-count");
@@ -58,7 +59,6 @@ function setupSearch() {
             if (text.length > 0) {
                 countElement.innerHTML = `Hittade <strong>${filtered.length}</strong> band som matchar "<em>${text}</em>"`;
             } else {
-                // Om sökfältet är tomt, visa bara totala antalet
                 countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
             }
         }
@@ -75,6 +75,11 @@ function renderBands(listToRender) {
 
     bandsGrid.innerHTML = "";
 
+    if (!listToRender || listToRender.length === 0) {
+        bandsGrid.innerHTML = "<p>Inga band att visa</p>";
+        return;
+    }
+
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const bandsToShow = listToRender.slice(start, end);
@@ -82,14 +87,22 @@ function renderBands(listToRender) {
     bandsToShow.forEach(band => {
         const card = document.createElement("div");
         card.classList.add("band-card");
+        
+        const musicGroupId = band.musicGroupId || "Unknown ID";
+        const imageLink = band.imageLink || 'images/default.jpg';
+        const name = band.name || 'Unknown';
+        const strGenre = band.strGenre || 'Unknown';
+        const establishedYear = band.establishedYear || 'N/A';
+        const albumCount = Array.isArray(band.albums) ? band.albums.length : (band.albums || 0);
+        
         card.innerHTML = `
-            <img src="${band.imageLink || 'images/default.jpg'}" alt="${band.name}">
+            <img src="${imageLink}" alt="${name}">
             <div class="band-info">
-                <h3>${band.name}</h3>
-                <p>Genre: ${band.genre}</p>
-                <p><strong>Established:</strong> ${band.established}</p>
-                <p><strong>Albums:</strong> ${band.albums}</p>
-                <a href="bands-detail/band-detail.html?id=${band.id}" class="btn">View Details</a>
+                <h3>${name}</h3>
+                <p><strong>Genre:</strong> ${strGenre}</p>
+                <p><strong>Established:</strong> ${establishedYear}</p>
+                <p><strong>Albums:</strong> ${albumCount}</p>
+                <a href="bands-detail/band-detail.html?id=${musicGroupId}" class="btn">View Details</a>
             </div>
         `;
         bandsGrid.appendChild(card);
@@ -124,27 +137,42 @@ function renderPagination(listToRender) {
 
 // --- INIT ---
 async function init() {
-
-
     renderHeader();
 
     const countElement = document.getElementById("results-count");
-    if (countElement) {
-        countElement.innerHTML = `Visar alla <strong>${bands.length}</strong> band`;
+    
+    try {
+        const apiBandsResponse = await service.readMusicGroupsAsync(1, false, null, 100);
+        let apiBands = apiBandsResponse.pageItems || [];
+
+        
+        const localBands = JSON.parse(sessionStorage.getItem("localBands")) || [];
+
+        
+        allBands = [...localBands, ...apiBands];
+
+        allBands.sort((a, b) => a.establishedYear - b.establishedYear);
+
+        if (countElement) {
+            countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
+        }
+
+        console.log("Totalt antal band:", allBands.length);
+        console.log("Varav lokala:", localBands.length);
+
+        renderBands(allBands);
+    } catch (error) {
+        allBands = [];
+        if (countElement) {
+            countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
+        }
+        renderBands(allBands);
     }
-
-    const localBands = JSON.parse(localStorage.getItem("bands")) || bands;
-    const apiBands = await fetchBands();
-
-    allBands = [...localBands, ...apiBands];
-    allBands.sort((a, b) => a.established - b.established);
-
-    if (countElement) {
-        countElement.innerHTML = `Visar alla <strong>${allBands.length}</strong> band`;
-    }
-
-
-    renderBands(allBands);
 }
 
-init();
+
+if (document.getElementById("bands-grid")) {
+    init();
+} else {
+    renderHeader();
+}
